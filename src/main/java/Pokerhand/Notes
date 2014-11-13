@@ -1,3 +1,38 @@
 Notes:
-When parsing the request JSON, if the request has double or more of the same attributes, eg. two name, two hand
-we currently throw an error, but not gracefully
+- I made the assumption that we will only be using ONE deck, hence if we see duplicates, thats throws an error
+- Also assuming we will have unique names, hence if we see the same name, throw an error
+- Since we don't use suits to determine which hands is bigger when all cards is of the same rank, we will have a draw
+- When parsing the request JSON, we will ignore unknown parameters, and will be working as long as name & hand is present
+- When parsing the request JSON, if the request has double or more of the same attributes, eg. two name, two hand
+  we currently throw an error, but not gracefully
+- Current the web service only accepts JSON, will need to add code to be able to parse both XML and JSON
+
+To Do:
+End to End test
+End to End negative test (eg. invalid json request, empty request, partial empty request)
+Empty name for a player
+Verify P2 wins
+Verify Draw case
+Analyzing each hand will give the correct poker hand type (see the different hand combination below)
+Verify the win cases (straightflush wins everything, four wins everything lower, etc...)
+
+		String[] three1 = {"4H", "5D", "5S", "5C", "KD" };
+		String[] three2 = {"5H", "5H", "5S", "8C", "7D" };
+		String[] three3 = {"2H", "9D", "9S", "3C", "9H" };
+		String[] full1 = {"3H", "3D", "3S", "2C", "2D" };
+		String[] full2 = {"4H", "5D", "4S", "5C", "4D" };
+		String[] twopair1 = {"2H", "4D", "2S", "4C", "5D" };
+		String[] twopair2 = {"KH", "3D", "5S", "3C", "KD" };
+		String[] twopair3 = {"10H", "8D", "10S", "8C", "2D" };
+		String[] onepair1 = {"10H", "4D", "10S", "8C", "2D" };
+		String[] high = {"10H", "8D", "9S", "AC", "2D" };
+		String[] flush1 = {"10H", "8H", "9H", "AH", "2H" };
+		String[] flush2 = {"10S", "8S", "9S", "AS", "2S" };
+		String[] almostflush = {"10H", "8H", "9H", "AH", "2D" };
+		String[] straight = {"8H", "JD", "9S", "10C", "7D" };
+		String[] straight2 = {"2H", "3D", "AS", "4C", "5D" };
+		String[] straight3 = {"10H", "QD", "AS", "JC", "KD" };
+		String[] sf1 = {"10D", "QD", "AD", "JD", "KD" };
+		String[] sf2 = {"2H", "3H", "AH", "4H", "5H" };
+		
+		PokerhandHelper.analyzeHand(h1)

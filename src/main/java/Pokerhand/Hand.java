@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 // This class represents each player 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Hand implements Serializable{
 
 	private static final long serialVersionUID = -2146262003746850570L;

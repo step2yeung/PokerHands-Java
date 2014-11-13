@@ -28,10 +28,10 @@ public class PokerhandHelper {
 		
 		Hand[] hands = game.getHands();
 		
-		if(hands[0].getName().equals(""))
+		if(hands[0].getName().trim().equals(""))
     	{
     		return "Player 1 has an empty name! Comon, give him/her a name.";
-    	}else if(hands[1].getName().equals(""))
+    	}else if(hands[1].getName().trim().equals(""))
     	{
     		return "Player 2 has an empty name! Comon, give him/her a name.";
     	}

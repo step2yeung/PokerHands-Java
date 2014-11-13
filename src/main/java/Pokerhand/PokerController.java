@@ -23,10 +23,28 @@ public class PokerController {
     public Result comparePokerhand(@RequestBody @Valid Game game) 
     {
     	try{
+    		// Verify valid json request 
+    		if(game == null)
+    		{
+    			throw new PokerhandClientException("We are missing something!");
+    		}
+    		else if(game.getHands() == null)
+    		{
+    			throw new PokerhandClientException("We are missing something!");
+    		}
+    		else if(game.getHands().length != 2)
+    		{
+    			throw new PokerhandClientException("We are missing someone!");
+    		}
+    		
 	    	// Get the two hand and initialize the hand
 	    	Hand leftHand = game.getLeftHand();
 	    	Hand rightHand = game.getRightHand();
-	    	if(!leftHand.initializeHand() || !rightHand.initializeHand())
+	    	if(leftHand == null || rightHand == null)
+	    	{
+	    		throw new PokerhandClientException("We are missing something!");
+	    	}
+	    	else if(!leftHand.initializeHand() || !rightHand.initializeHand())
 	    	{
 	    		// problem while parsing the cards
 	    		// return new Result(String.format(clientProblem, "Some weird cards we got here"));
