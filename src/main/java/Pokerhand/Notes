@@ -1,0 +1,3 @@
+Notes:
+When parsing the request JSON, if the request has double or more of the same attributes, eg. two name, two hand
+we currently throw an error, but not gracefully
